@@ -1,5 +1,6 @@
 {% load crispy_forms_tags %}
 {% load static %}
+
 <div class="row">
     <div class="col-6">
           {% for b in blogs %}
@@ -22,11 +23,12 @@
 <br>
 {% endfor %}
     </div>
-    <div class="col-6">
+
+    <div class="col-md-6">
       <form method="post" id="blogform" enctype='multipart/form-data' >
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Create Blog" class="btn btn-primary">
+    <input type="button" value="Create Blog" class="btn btn-primary" id="create">
 </form>
 
     </div>
@@ -34,4 +36,26 @@
 
 
 
+<script>
+$(document).ready(function(){
+var frm = $('#blogform');
+  $('#create').click(function(event) {
+   event.preventDefault();
 
+
+    var form = $('#blogform');
+    $.ajax({
+      type: form.attr('method'),
+      url: form.attr('action'),
+      enctype: 'multipart/form-data',
+      data:form.serialize(),
+      success: function(data)
+      {
+      $('#main').html(data);
+      }
+      });
+
+  });
+  });
+
+</script>

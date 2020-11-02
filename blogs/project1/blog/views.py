@@ -22,7 +22,7 @@ def blogs(request):
 @login_required()
 def blogs2(request):
     if request.method == 'POST':
-        form = BlogForm(request.POST,request.FILES)
+        form = BlogForm(request.POST)
         print("=============================")
         print(request.POST)
         print("=============================================")
@@ -34,6 +34,8 @@ def blogs2(request):
             blog.slug = ("-").join(blog.title.split(" ")) + "-" + str(blog.id)
             blog.save()
             form = BlogForm()
+        else:
+            print(form.errors)
         return render(request, 'blog3.html', {'blogs': Blog.objects.order_by('-created_at'), 'form': form})
 
     all_blog = Blog.objects.order_by('-created_at')

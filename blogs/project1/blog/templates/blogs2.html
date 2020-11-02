@@ -10,24 +10,6 @@
     {% include 'blog3.html' %}
 </div>
 
-<script>
 
-  $('#blogform').submit(function(event) {
-    event.preventDefault();
-    var form = $(this);
-    $.ajax({
-      type: form.attr('method'),
-      url: form.attr('action'),
-     enctype: 'multipart/form-data',
-      data: form.serialize(),
-      cover = $('cover').val(),
-      success: function(data)
-      {
-      $('#main').html(data);
-      }
-      });
 
-  });
-
-</script>
 {% endblock %}

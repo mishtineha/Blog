@@ -8,8 +8,7 @@ class Blog(models.Model):
     slug = models.CharField(max_length = 20,default = None,null = True,unique = True)
     created_by = models.ForeignKey(User,on_delete = models.CASCADE,default = None,null = True)
     created_at = models.DateTimeField(auto_now_add = True)
-    cover = models.FileField(upload_to = 'files/',default = None,null = True)
-    content = RichTextField()
+    content = models.TextField(max_length = 500)
 
     # def save(self,**kwargs):
     #     self.slug = ("-").join(self.title.split(" ")) + "-" + self.id
