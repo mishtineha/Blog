@@ -17,11 +17,11 @@
        {% endif %}
    </div>
    <div class="col-6">
-    <h4>{{ b.title }}</h4>
+    <h4><b>{{ b.title }}</b></h4>
 <br>{{ b.description }}
 
  <a href="{% url 'blog:blog_detail' b.slug %}">Read More....</a>
-    <br> by {{ b.created_by.username }}
+       <br> <i>by {{ b.created_by.username }}</i>
    </div>
   </div>
 <br>
