@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'ckeditor',
-'crispy_forms'
+    'ckeditor_uploader',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,4 @@ LOGOUT_REDIRECT_URL = 'blog:home'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CKEDITOR_UPLOAD_PATH = 'uploads/'

@@ -1,20 +1,20 @@
 {% load crispy_forms_tags %}
 {% load static %}
-
+<div class="container">
 <div class="row">
     <div class="col-6">
           {% for b in blogs %}
   <div class="row">
    <div class="col-6">
        {% if b.cover %}
-       <img src="{{ b.cover.url }}" class="img img-fluid" style="width:70%;">
+       <img src="{{ b.cover.url }}" class="img" style="width:70%;">
        {% else %}
-<img src="{% static 'assets/img/examples/studio-4.jpg' %}" class="img img-fluid" style="width:70%;">
+<img src="{% static 'assets/img/examples/studio-4.jpg' %}" class="img" style="width:70%;">
        {% endif %}
    </div>
    <div class="col-6">
-    <h4>{{ b.title }}</h4>
-<br>{{ b.description }}
+       <h4><b>{{ b.title }}</b></h4>
+{{ b.description }}
 
  <a href="{% url 'blog:blog_detail' b.slug %}">Read More....</a>
     <br> by {{ b.created_by.username }}
@@ -25,30 +25,36 @@
     </div>
 
     <div class="col-md-6">
-      <form method="post" id="blogform" enctype='multipart/form-data' >
+      <form method="post" id="blogform" enctype='multipart/form-data' class="form-control">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.media }}
+          {{ form.as_p }}
+
     <input type="button" value="Create Blog" class="btn btn-primary" id="create">
 </form>
 
     </div>
 </div>
 
-
+</div>
 
 <script>
 $(document).ready(function(){
 var frm = $('#blogform');
   $('#create').click(function(event) {
    event.preventDefault();
+var form2 = $('#blogform'),
+    fd = new FormData(form2[0]);
 
 
     var form = $('#blogform');
     $.ajax({
       type: form.attr('method'),
       url: form.attr('action'),
-      enctype: 'multipart/form-data',
-      data:form.serialize(),
+       processData: false,
+    contentType: false,
+      data:fd,
+      processData: false,
       success: function(data)
       {
       $('#main').html(data);

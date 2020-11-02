@@ -16,17 +16,13 @@ def home(request):
 
 
 def blogs(request):
-    all_blog = Blog.objects.all()
+    all_blog = Blog.objects.order_by('-created_at')
     return render(request,'blogs.html',{'blogs':all_blog})
 
 @login_required()
 def blogs2(request):
     if request.method == 'POST':
-        form = BlogForm(request.POST)
-        print("=============================")
-        print(request.POST)
-        print("=============================================")
-        print(request.FILES)
+        form = BlogForm(request.POST,request.FILES)
         if form.is_valid():
             blog = form.save()
             blog.created_by = request.user

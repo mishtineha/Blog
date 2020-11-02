@@ -1,5 +1,22 @@
-<b>{{ blog.title }}</b>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+<h4>{{ blog.title }}</h4>
 
-<p>
+<h3><b>{{ blog.description }}</b></h3>
+ {% if blog.cover %}
+       <img src="{{ blog.cover.url }}" class="img img-fluid" style="width:70%;">
+       {% else %}
+<img src="{% static 'assets/img/examples/studio-4.jpg' %}" class="img img-fluid" style="width:70%;">
+       {% endif %}
+        <br><br>
+
     {{ blog.content|safe }}
-</p>
+
+        </div>
+    <div class="col-2"></div>
+</div>
+{% endblock %}
