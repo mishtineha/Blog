@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="row">
+ <div class="col-2">
+
+ </div>
+ <div class="col-8">
+  {% for b in blogs %}
+  <div class="row">
+   <div class="col-6">
+       {% if b.cover %}
+       <img src="{{ b.cover.url }}" class="img img-fluid" style="width:70%;">
+       {% else %}
+<img src="{% static 'assets/img/examples/studio-4.jpg' %}" class="img img-fluid" style="width:70%;">
+       {% endif %}
+   </div>
+   <div class="col-6">
+    <h4>{{ b.title }}</h4>
+<br>{{ b.description }}
+
+ <a href="{% url 'blog:blog_detail' b.slug %}">Read More....</a>
+    <br> by {{ b.created_by.username }}
+   </div>
+  </div>
+<br>
+{% endfor %}
+ </div>
+ <div class="col-2">
+
+ </div>
+</div>
+
+{% endblock %}
